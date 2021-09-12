@@ -6,8 +6,9 @@
 
 <div>
     {% if user.image_url %}
+
     <div>
-        <img src="{{ user.image_url }}" alt="{{ user.full_name}}">
+        <img src="{{ user.image_url }}" alt="{{ user.full_name }}">
     </div>
     {% endif %}
 
@@ -15,11 +16,22 @@
         <h1>{{ user.full_name }}</h1>
 
         <form>
-            <button formaction="/users/{{ user.id }}/edit" formmethod="GET">Edit</button>
-            <button formaction="/users/{{ user.id }}/delete" formmethod="POST">Delete</button>
+            <button formaction="/users/{{ user.id }}/edit" formethod="GET">EDIT</button>
+            <button formaction="/users/{{ user.id }}/delete" formethod="POST">DELETE</button>
         </form>
+
+        <h2>Posts</h2>
+
+        <ul>
+            {% for post in user.posts %}
+            <li>
+                <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+                <small>{{ post.friendly_date }}</small>
+            </li>
+            {% endfor %}
+        </ul>
+        <p><a href="/users/{{ user.id }}/posts/new">ADD POST</a></p>
     </div>
 </div>
-
 
 {% endblock %}
